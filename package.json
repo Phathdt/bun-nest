@@ -37,6 +37,7 @@
   "devDependencies": {
     "@nestjs/testing": "^11.0.0",
     "@testcontainers/postgresql": "^11.14.0",
+    "@types/express": "^5.0.6",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.0.0",
     "@types/pg": "^8.20.0",

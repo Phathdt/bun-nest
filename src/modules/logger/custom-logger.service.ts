@@ -37,6 +37,10 @@ export class CustomLoggerService implements LoggerService {
   fatal(message: unknown, context?: string): void {
     this.logger.fatal({ context }, normalizeMessage(message));
   }
+
+  info(data: Record<string, unknown>, message: string): void {
+    this.logger.info(data, message);
+  }
 }
 
 function getFormatOptions(format: 'json' | 'text'): LoggerOptions {
