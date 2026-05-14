@@ -17,6 +17,22 @@ export class CustomConfigService {
     this.validateConfig();
   }
 
+  get host(): AppConfig['host'] {
+    return this.config.host;
+  }
+
+  get database(): AppConfig['database'] {
+    return this.config.database;
+  }
+
+  get redis(): AppConfig['redis'] {
+    return this.config.redis;
+  }
+
+  get logger(): AppConfig['logger'] {
+    return this.config.logger;
+  }
+
   get<T = unknown>(key: string): T {
     const keys = key.split('.');
     let value: unknown = this.config;
@@ -46,7 +62,7 @@ export class CustomConfigService {
     for (const key of Object.keys(source)) {
       const value = source[key];
 
-      if (Object.prototype.hasOwnProperty.call(target, key)) {
+      if (key in target) {
         continue;
       }
 
@@ -208,5 +224,3 @@ export class CustomConfigService {
     this.nestLogger.log('Configuration validation passed');
   }
 }
-
-export interface CustomConfigService extends AppConfig {}

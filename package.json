@@ -8,6 +8,8 @@
     "start:prod": "bun run dist/src/main.js",
     "dev": "bun --watch src/main.ts",
     "build": "tsc -p tsconfig.build.json",
+    "format": "prettier --write .",
+    "lint": "oxlint .",
     "db:up": "docker compose up -d postgres redis",
     "db:down": "docker compose down",
     "prisma:generate": "bunx --bun prisma generate",
@@ -42,6 +44,8 @@
     "@types/node": "^22.0.0",
     "@types/pg": "^8.20.0",
     "@vitest/coverage-v8": "^4.1.6",
+    "oxlint": "^1.64.0",
+    "prettier": "^3.8.3",
     "testcontainers": "^11.14.0",
     "typescript": "^5.8.0",
     "vitest": "^4.0.0"

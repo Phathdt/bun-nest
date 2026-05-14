@@ -64,7 +64,9 @@ describe('ProductPrismaRepo', () => {
       price: 39,
       stock: 3,
     });
-    await expect(repository.update(crypto.randomUUID(), { stock: 1 })).resolves.toBeNull();
+    await expect(
+      repository.update(crypto.randomUUID(), { stock: 1 }),
+    ).resolves.toBeNull();
   });
 
   it('deletes existing products and returns false for missing products', async () => {

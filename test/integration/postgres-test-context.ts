@@ -1,4 +1,7 @@
-import { PostgreSqlContainer, type StartedPostgreSqlContainer } from '@testcontainers/postgresql';
+import {
+  PostgreSqlContainer,
+  type StartedPostgreSqlContainer,
+} from '@testcontainers/postgresql';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { CustomConfigService } from '../../src/modules/config';

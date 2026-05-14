@@ -21,7 +21,5 @@ export function convertToCamelCase(value: unknown): unknown {
 }
 
 function toCamelCase(value: string): string {
-  return value.replace(/[_-]([a-zA-Z0-9])/g, (_, letter: string) =>
-    letter.toUpperCase(),
-  );
+  return value.replace(/[_-]([a-zA-Z0-9])/g, (_, letter: string) => letter.toUpperCase());
 }

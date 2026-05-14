@@ -10,9 +10,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ZodValidationPipe } from '../../common/zod-validation.pipe';
-import {
-  ProductNotFoundError,
-} from './application/services/product.service';
+import { ProductNotFoundError } from './application/services/product.service';
 import type { Product } from './domain/entities/product.entity';
 import {
   createProductSchema,
