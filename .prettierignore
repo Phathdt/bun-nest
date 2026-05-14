@@ -2,4 +2,7 @@ node_modules
 dist
 coverage
 src/generated
+apps/web/node_modules
+apps/web/dist
 bun.lock
+apps/web/bun.lock

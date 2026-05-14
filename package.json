@@ -19,7 +19,11 @@
     "test:unit": "vitest run",
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "web:dev": "cd apps/web && bun run dev",
+    "web:build": "cd apps/web && bun run build",
+    "web:lint": "cd apps/web && bun run lint",
+    "web:preview": "cd apps/web && bun run preview"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.0",

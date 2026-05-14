@@ -39,10 +39,20 @@ bun run dev
 
 The API starts at `http://localhost:4000/api`.
 
+Run the Vite web app:
+
+```bash
+bun run web:dev
+```
+
+The web app starts at `http://localhost:5173` and proxies `/api` requests to the
+Nest API.
+
 ## Build
 
 ```bash
 bun run build
+bun run web:build
 ```
 
 ## Docker
