@@ -11,8 +11,14 @@ export type RedisConfig = {
   url: string;
 };
 
+export type LoggerConfig = {
+  level: string;
+  format: 'json' | 'text';
+};
+
 export type AppConfig = {
   host: HostConfig;
   database: DatabaseConfig;
   redis: RedisConfig;
+  logger: LoggerConfig;
 };

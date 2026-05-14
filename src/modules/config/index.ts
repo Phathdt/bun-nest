@@ -1,3 +1,9 @@
 export { ConfigModule } from './config.module';
 export { CustomConfigService } from './custom-config.service';
-export type { AppConfig, DatabaseConfig, HostConfig, RedisConfig } from './config.interface';
+export type {
+  AppConfig,
+  DatabaseConfig,
+  HostConfig,
+  LoggerConfig,
+  RedisConfig,
+} from './config.interface';

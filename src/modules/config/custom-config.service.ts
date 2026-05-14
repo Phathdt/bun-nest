@@ -7,7 +7,7 @@ import { camelToSnakeCase, convertToCamelCase } from './utils';
 
 @Injectable()
 export class CustomConfigService {
-  private readonly logger = new Logger(CustomConfigService.name);
+  private readonly nestLogger = new Logger(CustomConfigService.name);
   private config!: AppConfig;
   private readonly proxyCache = new WeakMap<object, object>();
 
@@ -120,10 +120,10 @@ export class CustomConfigService {
 
       this.config = convertToCamelCase(rawConfig) as AppConfig;
       this.overrideWithEnv(this.config as unknown as Record<string, unknown>);
-      this.logger.log('Configuration loaded successfully from config.yml');
+      this.nestLogger.log('Configuration loaded successfully from config.yml');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown error';
-      this.logger.error('Failed to load configuration', message);
+      this.nestLogger.error('Failed to load configuration', message);
       throw new Error(`Failed to load configuration: ${message}`);
     }
   }
@@ -189,15 +189,23 @@ export class CustomConfigService {
       errors.push('redis.url must be configured');
     }
 
+    if (isPlaceholder(this.config.logger?.level)) {
+      errors.push('logger.level must be configured');
+    }
+
+    if (!['json', 'text'].includes(this.config.logger?.format)) {
+      errors.push('logger.format must be either "json" or "text"');
+    }
+
     if (errors.length > 0) {
       const message = `Configuration validation failed:\n${errors
         .map((error) => `  - ${error}`)
         .join('\n')}`;
-      this.logger.error(message);
+      this.nestLogger.error(message);
       throw new Error(message);
     }
 
-    this.logger.log('Configuration validation passed');
+    this.nestLogger.log('Configuration validation passed');
   }
 }
 

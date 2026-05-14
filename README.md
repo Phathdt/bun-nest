@@ -15,7 +15,8 @@ cp .env.example .env
 ```
 
 Application configuration is loaded from `config/config.yml`. Environment
-overrides use nested `__` keys, for example `DATABASE__URL` or `HOST__PORT`.
+overrides use nested `__` keys, for example `DATABASE__URL`, `HOST__PORT`, or
+`LOGGER__FORMAT`. Logger format supports `json` and `text`.
 
 Start local infrastructure:
 
