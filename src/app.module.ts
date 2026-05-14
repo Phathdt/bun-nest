@@ -5,10 +5,11 @@ import {
   HttpLoggerMiddleware,
   LoggerModule,
 } from './modules/logger';
+import { OrderModule } from './modules/orders';
 import { ProductModule } from './modules/products/product.module';
 
 @Module({
-  imports: [ConfigModule, LoggerModule, ProductModule],
+  imports: [ConfigModule, LoggerModule, ProductModule, OrderModule],
 })
 export class AppModule implements NestModule {
   constructor(private readonly logger: CustomLoggerService) {}

@@ -59,6 +59,10 @@ docker run --rm -p 4000:4000 --env-file .env bun-nest-products-api
 - `POST /api/products`
 - `PATCH /api/products/:id`
 - `DELETE /api/products/:id`
+- `GET /api/orders`
+- `GET /api/orders/:id`
+- `POST /api/orders`
+- `PATCH /api/orders/:id/cancel`
 
 Example payload:
 
@@ -68,6 +72,19 @@ Example payload:
   "description": "Mechanical keyboard",
   "price": 99,
   "stock": 10
+}
+```
+
+Create order payload:
+
+```json
+{
+  "items": [
+    {
+      "productId": "00000000-0000-0000-0000-000000000001",
+      "quantity": 2
+    }
+  ]
 }
 ```
 

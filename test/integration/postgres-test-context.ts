@@ -56,6 +56,8 @@ export async function setupPostgresTestContext(): Promise<PostgresTestContext> {
 }
 
 export async function resetPostgresTestData(database: DatabaseService): Promise<void> {
+  await database.orderItem.deleteMany();
+  await database.order.deleteMany();
   await database.product.deleteMany();
 }
 

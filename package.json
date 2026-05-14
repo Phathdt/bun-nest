@@ -15,7 +15,8 @@
     "prisma:generate": "bunx --bun prisma generate",
     "prisma:migrate": "bunx --bun prisma migrate dev",
     "bun:test": "bun run test",
-    "test": "vitest run",
+    "test": "bun run test:unit && bun run test:integration",
+    "test:unit": "vitest run",
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
