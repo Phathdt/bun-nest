@@ -14,6 +14,9 @@ Copy environment values:
 cp .env.example .env
 ```
 
+Application configuration is loaded from `config/config.yml`. Environment
+overrides use nested `__` keys, for example `DATABASE__URL` or `HOST__PORT`.
+
 Start local infrastructure:
 
 ```bash

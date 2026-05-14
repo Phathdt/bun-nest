@@ -8,6 +8,7 @@ RUN bun install --frozen-lockfile
 
 FROM deps AS build
 COPY src ./src
+COPY config ./config
 ENV DATABASE_URL=postgresql://app:app@localhost:5432/bun_nest?schema=public
 RUN bunx --bun prisma generate
 RUN bun run build
@@ -19,6 +20,7 @@ ENV NODE_ENV=production
 COPY package.json bun.lock ./
 RUN bun install --production --frozen-lockfile
 
+COPY config ./config
 COPY --from=build /app/dist ./dist
 
 EXPOSE 4000

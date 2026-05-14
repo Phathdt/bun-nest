@@ -1,6 +1,7 @@
 import { PostgreSqlContainer, type StartedPostgreSqlContainer } from '@testcontainers/postgresql';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { CustomConfigService } from '../../src/modules/config';
 import { DatabaseService } from '../../src/modules/database/database.service';
 
 const execFileAsync = promisify(execFile);
@@ -13,6 +14,7 @@ export type PostgresTestContext = {
 
 export async function setupPostgresTestContext(): Promise<PostgresTestContext> {
   const previousDatabaseUrl = process.env.DATABASE_URL;
+  const previousNestedDatabaseUrl = process.env.DATABASE__URL;
   const container = await new PostgreSqlContainer('postgres:17-alpine')
     .withDatabase('bun_nest_test')
     .withUsername('app')
@@ -20,10 +22,12 @@ export async function setupPostgresTestContext(): Promise<PostgresTestContext> {
     .start();
 
   process.env.DATABASE_URL = container.getConnectionUri();
+  process.env.DATABASE__URL = container.getConnectionUri();
   await migrate();
   await seed();
 
-  const database = new DatabaseService();
+  const config = new CustomConfigService();
+  const database = new DatabaseService(config);
   await database.$connect();
 
   return {
@@ -37,6 +41,12 @@ export async function setupPostgresTestContext(): Promise<PostgresTestContext> {
         process.env.DATABASE_URL = previousDatabaseUrl;
       } else {
         delete process.env.DATABASE_URL;
+      }
+
+      if (previousNestedDatabaseUrl) {
+        process.env.DATABASE__URL = previousNestedDatabaseUrl;
+      } else {
+        delete process.env.DATABASE__URL;
       }
     },
   };

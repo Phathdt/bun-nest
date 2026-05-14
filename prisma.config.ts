@@ -1,5 +1,28 @@
 import 'dotenv/config';
-import { defineConfig, env } from 'prisma/config';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import * as yaml from 'js-yaml';
+import { defineConfig } from 'prisma/config';
+
+function loadDatabaseUrl(): string {
+  if (process.env.DATABASE_URL) {
+    return process.env.DATABASE_URL;
+  }
+
+  const configPath = path.join(process.cwd(), 'config', 'config.yml');
+  const fileContents = fs.readFileSync(configPath, 'utf8');
+  const config = yaml.load(fileContents) as {
+    database?: {
+      url?: string;
+    };
+  };
+
+  if (!config.database?.url) {
+    throw new Error('database.url must be configured in config/config.yml');
+  }
+
+  return config.database.url;
+}
 
 export default defineConfig({
   schema: 'prisma/schema.prisma',
@@ -8,6 +31,6 @@ export default defineConfig({
     seed: 'bun run prisma/seed.ts',
   },
   datasource: {
-    url: env('DATABASE_URL'),
+    url: loadDatabaseUrl(),
   },
 });
