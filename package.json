@@ -19,6 +19,8 @@
     "backend:build": "turbo build --filter=@bun-nest/backend",
     "backend:lint": "turbo lint --filter=@bun-nest/backend",
     "backend:test": "turbo test --filter=@bun-nest/backend",
+    "backend:test:unit": "turbo test:unit --filter=@bun-nest/backend",
+    "backend:test:integration": "turbo test:integration --filter=@bun-nest/backend",
     "backend:typecheck": "turbo typecheck --filter=@bun-nest/backend",
     "backend:prisma:generate": "turbo prisma:generate --filter=@bun-nest/backend",
     "backend:prisma:migrate": "turbo prisma:migrate --filter=@bun-nest/backend",
