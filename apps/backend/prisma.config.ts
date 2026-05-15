@@ -9,7 +9,7 @@ function loadDatabaseUrl(): string {
     return process.env.DATABASE_URL;
   }
 
-  const configPath = path.join(process.cwd(), 'config', 'config.yml');
+  const configPath = resolveConfigPath();
   const fileContents = fs.readFileSync(configPath, 'utf8');
   const config = yaml.load(fileContents) as {
     database?: {
@@ -22,6 +22,20 @@ function loadDatabaseUrl(): string {
   }
 
   return config.database.url;
+}
+
+function resolveConfigPath(): string {
+  const configPath = path.join(process.cwd(), 'config', 'config.yml');
+  if (fs.existsSync(configPath)) {
+    return configPath;
+  }
+
+  const exampleConfigPath = path.join(process.cwd(), 'config', 'config.yml.example');
+  if (fs.existsSync(exampleConfigPath)) {
+    return exampleConfigPath;
+  }
+
+  return configPath;
 }
 
 export default defineConfig({

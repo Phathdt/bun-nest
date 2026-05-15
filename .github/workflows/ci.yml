@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Prepare backend config
+        run: cp apps/backend/config/config.yml.example apps/backend/config/config.yml
+
       - name: Generate Prisma client
         run: bun run backend:prisma:generate
 
@@ -77,6 +80,9 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
+
+      - name: Prepare backend config
+        run: cp apps/backend/config/config.yml.example apps/backend/config/config.yml
 
       - name: Install Playwright browsers
         run: bun run e2e:install:browsers
