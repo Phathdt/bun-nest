@@ -13,7 +13,7 @@
     "test": "turbo test",
     "test:e2e": "bun run db:up && bun run backend:prisma:migrate:deploy && bun run backend:prisma:seed && turbo test:e2e --filter=e2e",
     "typecheck": "turbo typecheck",
-    "db:up": "docker compose up -d postgres redis",
+    "db:up": "docker compose up -d --wait postgres redis",
     "db:down": "docker compose down",
     "backend:dev": "turbo dev --filter=@bun-nest/backend",
     "backend:build": "turbo build --filter=@bun-nest/backend",

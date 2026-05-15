@@ -7,3 +7,7 @@ database:
 
 redis:
   url: redis://localhost:6379
+
+logger:
+  level: info
+  format: json
