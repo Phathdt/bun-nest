@@ -87,5 +87,17 @@ jobs:
       - name: Install Playwright browsers
         run: bun run e2e:install:browsers
 
+      - name: Start database services
+        run: bun run db:up
+
+      - name: Generate Prisma client
+        run: bun run backend:prisma:generate
+
+      - name: Run database migrations
+        run: bun run backend:prisma:migrate:deploy
+
+      - name: Seed database
+        run: bun run backend:prisma:seed
+
       - name: Run E2E tests
-        run: bun run test:e2e
+        run: bun run e2e:test
