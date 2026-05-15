@@ -11,7 +11,7 @@
     "format": "prettier --write .",
     "lint": "turbo lint",
     "test": "turbo test",
-    "test:e2e": "bun run db:up && bun run backend:prisma:migrate:deploy && bun run backend:prisma:seed && turbo test:e2e --filter=e2e",
+    "test:e2e": "bun run db:up && bun run backend:prisma:generate && bun run backend:prisma:migrate:deploy && bun run backend:prisma:seed && turbo test:e2e --filter=e2e",
     "typecheck": "turbo typecheck",
     "db:up": "docker compose up -d --wait postgres redis",
     "db:down": "docker compose down",
