@@ -1,6 +1,7 @@
-# Bun Nest Products API
+# Bun Nest Workspace
 
-Sample NestJS REST API using Bun, Zod 4 validation, Prisma 7, Postgres, Redis, and Vitest.
+Turborepo workspace with a NestJS API in `apps/backend` and a Vite React app in
+`apps/web`.
 
 ## Install
 
@@ -12,9 +13,10 @@ Copy environment values:
 
 ```bash
 cp .env.example .env
+cp apps/backend/config/config.yml.example apps/backend/config/config.yml
 ```
 
-Application configuration is loaded from `config/config.yml`. Environment
+Backend configuration is loaded from `apps/backend/config/config.yml`. Environment
 overrides use nested `__` keys, for example `DATABASE__URL`, `HOST__PORT`, or
 `LOGGER__FORMAT`. Logger format supports `json` and `text`.
 
@@ -27,14 +29,14 @@ bun run db:up
 Generate Prisma Client and run migrations:
 
 ```bash
-bun run prisma:generate
-bun run prisma:migrate
+bun run backend:prisma:generate
+bun run backend:prisma:migrate
 ```
 
 ## Run
 
 ```bash
-bun run dev
+bun run backend:dev
 ```
 
 The API starts at `http://localhost:4000/api`.
@@ -52,7 +54,6 @@ Nest API.
 
 ```bash
 bun run build
-bun run web:build
 ```
 
 ## Docker
@@ -101,7 +102,7 @@ Create order payload:
 ## Module Layout
 
 ```text
-src/modules/products
+apps/backend/src/modules/products
 ├── application/services
 ├── domain/dto
 ├── domain/entities
@@ -114,7 +115,7 @@ src/modules/products
 
 The HTTP controller calls `ProductService`, and `ProductService` depends on the
 `ProductRepository` interface. Nest binds that interface to `ProductPrismaRepo`,
-which uses `DatabaseService` from `src/modules/database`.
+which uses `DatabaseService` from `apps/backend/src/modules/database`.
 
 ## Test
 
@@ -125,7 +126,7 @@ bun run test
 Unit tests currently target application services only:
 
 ```bash
-bun run vitest --coverage
+bun run backend:test
 ```
 
 Coverage thresholds are set to 95% for statements, branches, functions, and
