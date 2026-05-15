@@ -101,3 +101,11 @@ jobs:
 
       - name: Run E2E tests
         run: bun run e2e:test
+
+      - name: Upload E2E report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-report
+          path: apps/e2e/test-results
+          if-no-files-found: warn
