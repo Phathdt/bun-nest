@@ -59,7 +59,7 @@ bun run build
 ## Docker
 
 ```bash
-docker build -t bun-nest-products-api .
+docker build -f apps/backend/Dockerfile -t bun-nest-products-api .
 docker run --rm -p 4000:4000 --env-file .env bun-nest-products-api
 ```
 
